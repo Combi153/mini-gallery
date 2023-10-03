@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>이미지 업로드</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-image: url("/background_upload.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+
+        .upload-container {
+            background: rgba(0, 0, 0, 0.5); /* 업로드 폼의 배경 색상 및 투명도 설정 */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 100px auto;
+            width: 50%;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="upload-container">
+    <h1>이미지 업로드</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="image">이미지 첨부:</label>
+        <input type="file" name="image" id="image"/>
+        <br/>
+        <label for="title">이미지 제목:</label>
+        <input type="text" name="title" id="title"/>
+        <br/>
+        <input type="submit" value="업로드"/>
+    </form>
+</div>
+</body>
+</html>

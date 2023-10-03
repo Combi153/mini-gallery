@@ -10,10 +10,10 @@
 
 - [ ] Application
     - [ ] 이미지 저장 기능
-        - [ ] Thymeleaf 저장 화면 생성
+        - [x] Thymeleaf 저장 화면 생성
         - [ ] 이미지 저장 api 추가
     - [ ] 이미지 조회 기능
-        - [ ] Thymeleaf 조회 화면 생성
+        - [x] Thymeleaf 조회 화면 생성
         - [ ] 이미지 조회 api 추가
 
 ## 메모

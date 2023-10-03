@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지 조회</title>
+    <style>
+        body {
+            background-image: url('/static/background_view.jpg'); /* 배경 이미지 경로를 설정하세요 */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+
+        .image-block {
+            display: inline-block;
+            margin: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* 이미지 블록의 배경 색상 및 투명도 설정 */
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .image-title {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<h1>이미지 조회</h1>
+<div th:each="image : ${images}" class="image-block">
+    <img th:src="${image.url}"/>
+    <div class="image-title" th:text="${image.title}"></div>
+</div>
+</body>
+</html>
