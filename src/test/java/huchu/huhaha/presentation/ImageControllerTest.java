@@ -20,6 +20,7 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -57,13 +58,13 @@ class ImageControllerTest {
         testResource = new ClassPathResource("testImage.png");
 
         given(amazonS3.getUrl(anyString(), anyString()))
-                .willReturn(testResource.getURL());
+                .willReturn(new URL("https://s3/testImage"));
     }
 
     @Test
     void 이미지를_업로드_한다() throws IOException {
         // given
-        ImageSaveRequest request = new ImageSaveRequest("fileName");
+        ImageSaveRequest request = new ImageSaveRequest("testImage");
         File file = testResource.getFile();
 
         // when

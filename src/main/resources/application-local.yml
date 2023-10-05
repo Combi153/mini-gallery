@@ -10,6 +10,8 @@ cloud:
       secretKey: testSecretKey
     stack:
       auto: false
+    cloudFront:
+      domain: https://test.cloudfront
 
 spring:
   datasource:

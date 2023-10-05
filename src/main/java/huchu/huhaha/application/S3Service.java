@@ -10,12 +10,20 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class S3Service {
 
+    private static final String SLASH = "/";
+
     private final AmazonS3 amazonS3;
     private final String bucket;
+    private final String cloudFrontDomain;
 
-    public S3Service(AmazonS3 amazonS3, @Value("${cloud.aws.s3.bucket}") String bucket) {
+    public S3Service(
+            AmazonS3 amazonS3,
+            @Value("${cloud.aws.s3.bucket}") String bucket,
+            @Value("${cloud.aws.cloudFront.domain}") String cloudFrontDomain
+    ) {
         this.amazonS3 = amazonS3;
         this.bucket = bucket;
+        this.cloudFrontDomain = cloudFrontDomain;
     }
 
     public String upload(String fileName, MultipartFile file) {
@@ -25,9 +33,14 @@ public class S3Service {
             metadata.setContentLength(file.getSize());
 
             amazonS3.putObject(bucket, fileName, file.getInputStream(), metadata);
-            return amazonS3.getUrl(bucket, fileName).toString();
+            return getImageUrl(amazonS3.getUrl(bucket, fileName).toString());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String getImageUrl(String s3Url) {
+        int fileNameStart = s3Url.lastIndexOf(SLASH);
+        return cloudFrontDomain + s3Url.substring(fileNameStart);
     }
 }

@@ -20,8 +20,12 @@
         - [x] 이미지 조회 api 추가
 
 - [ ] Postman test
-    - [ ] get object : GET /images
-    - [ ] put object : POST /images
+    - [x] local
+        - [x] get object : GET /images
+        - [x] put object : POST /images
+    - [ ] ec2
+        - [ ] get object : GET /images
+        - [ ] put object : POST /images
 
 ## 메모
 
