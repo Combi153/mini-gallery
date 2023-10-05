@@ -3,20 +3,20 @@
 ## 개발 요구사항
 
 - [x] S3 띄우기
-    - [ ] bucket policy 설정
-    - [ ] public access restrict
+    - [x] bucket policy 설정
+    - [x] public access restrict
 
-- [ ] CloudFront
-    - [ ] S3 OAI(Origin Access Identity) 설정
+- [x] CloudFront
+    - [x] S3 OAI(Origin Access Identity) 설정
 
-- [ ] 서버 띄우기
+- [x] 서버 띄우기
     - [x] ec2 설정 (was)
-    - [ ] nginx 설정 (reverse proxy)
+    - [ ] nginx 설정 (reverse proxy) -> 그냥 8080 포트로 하자.
 
-- [ ] Application
-    - [ ] 이미지 저장 기능
+- [x] Application
+    - [x] 이미지 저장 기능
         - [x] 이미지 저장 api 추가
-    - [ ] 이미지 조회 기능
+    - [x] 이미지 조회 기능
         - [x] 이미지 조회 api 추가
 
 - [ ] Postman test
