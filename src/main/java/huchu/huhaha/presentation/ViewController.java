@@ -23,6 +23,6 @@ public class ViewController {
     public String gallery(Model model) {
         List<ImageResponse> images = imageServiceFacade.readAll();
         model.addAttribute("images", images);
-        return "index";
+        return "gallery";
     }
 }
