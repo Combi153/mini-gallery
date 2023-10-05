@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>이미지 조회</title>
@@ -31,13 +31,68 @@
             max-width: 100%;
             height: auto;
         }
+
+        /* 이미지 추가 업로드 버튼 스타일 */
+        #upload-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 <h1>이미지 조회</h1>
-<div th:each="image : ${images}" class="image-block">
-    <img th:src="${image.url}"/>
-    <div class="image-title" th:text="${image.title}"></div>
-</div>
+<div id="image-container"></div>
+
+<!-- 이미지 추가 업로드 버튼 -->
+<button id="upload-button" onclick="navigateToUpload()">이미지 추가 업로드</button>
+
+<script>
+    // 이미지를 조회하고 렌더링하는 함수
+    function loadImages() {
+        // AJAX 요청을 보냅니다.
+        $.ajax({
+            url: '/images', // 이미지 목록을 반환하는 컨트롤러 경로
+            type: 'GET',
+            dataType: 'json', // 반환되는 데이터 형식 (JSON)
+            success: function (data) {
+                // 이미지 데이터를 받아와서 렌더링
+                var imageContainer = document.getElementById("image-container");
+                for (var i = 0; i < data.length; i++) {
+                    var imageDiv = document.createElement("div");
+                    imageDiv.classList.add("image-block");
+
+                    var image = document.createElement("img");
+                    image.src = data[i].url;
+
+                    var imageTitle = document.createElement("div");
+                    imageTitle.classList.add("image-title");
+                    imageTitle.innerText = data[i].title;
+
+                    imageDiv.appendChild(image);
+                    imageDiv.appendChild(imageTitle);
+                    imageContainer.appendChild(imageDiv);
+                }
+            },
+            error: function () {
+                console.error("이미지를 불러올 수 없습니다.");
+            }
+        });
+    }
+
+    // 페이지 로드 시 이미지를 불러옵니다.
+    loadImages();
+
+    // 이미지 추가 업로드 버튼 클릭 시 /upload 페이지로 이동
+    function navigateToUpload() {
+        window.location.href = "/upload";
+    }
+</script>
 </body>
 </html>
