@@ -3,6 +3,11 @@
 ## 개발 요구사항
 
 - [x] S3 띄우기
+    - [ ] bucket policy 설정
+    - [ ] public access restrict
+
+- [ ] CloudFront
+    - [ ] S3 OAI(Origin Access Identity) 설정
 
 - [ ] 서버 띄우기
     - [x] ec2 설정 (was)
@@ -10,13 +15,13 @@
 
 - [ ] Application
     - [ ] 이미지 저장 기능
-        - [ ] Thymeleaf 저장 화면 생성
-            - 동작을 안 하네..
         - [x] 이미지 저장 api 추가
     - [ ] 이미지 조회 기능
-        - [ ] Thymeleaf 조회 화면 생성
-            - 동작을 안 하네..
         - [x] 이미지 조회 api 추가
+
+- [ ] Postman test
+    - [ ] get object : GET /images
+    - [ ] put object : POST /images
 
 ## 메모
 
@@ -26,4 +31,7 @@
 - ec2에 있는 이미지를 어떻게 s3로 옮길까?
 - s3 사용하는 api에 대한 Transaction 관리를 어떻게 할까?
     - facade pattern 적용
-    - TransactionTemplate 사용
+
+- 허브가 보내준 자료
+- s3 테스트 알아보기
+- 경로 이미지 ImageIO 어떻게 처리할지 고민
