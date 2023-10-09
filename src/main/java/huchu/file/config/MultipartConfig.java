@@ -1,4 +1,4 @@
-package huchu.huhaha.config;
+package huchu.file.config;
 
 import jakarta.servlet.MultipartConfigElement;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;

@@ -1,4 +1,4 @@
-package huchu.huhaha.presentation;
+package huchu.post.presentation;
 
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -9,11 +9,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 
 import com.amazonaws.services.s3.AmazonS3;
-import huchu.huhaha.domain.Image;
-import huchu.huhaha.domain.ImageRepository;
-import huchu.huhaha.dto.ImageResponse;
-import huchu.huhaha.dto.ImageSaveRequest;
-import huchu.huhaha.dto.ImageSaveResponse;
+import huchu.post.domain.Post;
+import huchu.post.domain.PostRepository;
+import huchu.post.dto.PostResponse;
+import huchu.post.dto.PostSaveRequest;
+import huchu.post.dto.PostSaveResponse;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.ExtractableResponse;
@@ -39,13 +39,13 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 @Sql(value = "/truncate.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class ImageControllerTest {
+class PostControllerTest {
 
     @LocalServerPort
     private int port;
 
     @Autowired
-    private ImageRepository imageRepository;
+    private PostRepository postRepository;
 
     @MockBean
     private AmazonS3 amazonS3;
@@ -64,7 +64,7 @@ class ImageControllerTest {
     @Test
     void 이미지를_업로드_한다() throws IOException {
         // given
-        ImageSaveRequest request = new ImageSaveRequest("testImage");
+        PostSaveRequest request = new PostSaveRequest("testImage");
         File file = testResource.getFile();
 
         // when
@@ -76,18 +76,18 @@ class ImageControllerTest {
                 .extract();
 
         // then
-        ImageSaveResponse imageSaveResponse = response.as(ImageSaveResponse.class);
+        PostSaveResponse postSaveResponse = response.as(PostSaveResponse.class);
 
         assertSoftly(softly -> {
             softly.assertThat(response.statusCode()).isEqualTo(CREATED.value());
-            softly.assertThat(imageSaveResponse.imageId()).isNotNull();
+            softly.assertThat(postSaveResponse.imageId()).isNotNull();
         });
     }
 
     @Test
     void 모든_이미지를_조회한다() {
         // given
-        imageRepository.save(new Image("test", "test.url"));
+        postRepository.save(new Post("test", "test.url"));
 
         // when
         ExtractableResponse<Response> response = RestAssured.given().log().all()
@@ -96,12 +96,12 @@ class ImageControllerTest {
                 .extract();
 
         // then
-        List<ImageResponse> imageResponses = response.as(new TypeRef<>() {
+        List<PostResponse> postRespons = response.as(new TypeRef<>() {
         });
 
         assertSoftly(softly -> {
             softly.assertThat(response.statusCode()).isEqualTo(OK.value());
-            softly.assertThat(imageResponses).containsExactly(new ImageResponse("test", "test.url"));
+            softly.assertThat(postRespons).containsExactly(new PostResponse("test", "test.url"));
         });
     }
 }

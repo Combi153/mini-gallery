@@ -1,4 +1,4 @@
-package huchu.huhaha.domain;
+package huchu.post.domain;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
@@ -15,26 +15,26 @@ import lombok.experimental.Accessors;
 @Getter
 @NoArgsConstructor(access = PROTECTED)
 @Entity
-public class Image {
+public class Post {
 
-    @Column(name = "image_id")
+    @Column(name = "post_id")
     @GeneratedValue(strategy = IDENTITY)
     @Id
     private Long id;
 
     @Column(nullable = false)
-    private String imageName;
+    private String postName;
 
     @Column(nullable = false)
-    private String imageUrl;
+    private String postImageUrl;
 
-    public Image(Long id, String imageName, String imageUrl) {
+    public Post(Long id, String postName, String postImageUrl) {
         this.id = id;
-        this.imageName = imageName;
-        this.imageUrl = imageUrl;
+        this.postName = postName;
+        this.postImageUrl = postImageUrl;
     }
 
-    public Image(String imageName, String imageUrl) {
-        this(null, imageName, imageUrl);
+    public Post(String postName, String postImageUrl) {
+        this(null, postName, postImageUrl);
     }
 }

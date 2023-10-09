@@ -11,7 +11,7 @@
             color: black;
         }
 
-        .image-block {
+        .post-block {
             display: inline-block;
             margin: 20px;
             background-color: rgba(0, 0, 0, 0.7);
@@ -19,7 +19,7 @@
             padding: 10px;
         }
 
-        .image-title {
+        .post-title {
             margin-top: 20px;
             font-weight: bold;
             color: azure;
@@ -33,9 +33,9 @@
 </head>
 <body>
 <h1>Mini Gallery</h1>
-<div th:each="image : ${images}" class="image-block">
-    <img th:src="${image.url}"/>
-    <div class="image-title" th:text="${image.title}"></div>
+<div th:each="post : ${posts}" class="post-block">
+    <img th:src="${post.url}"/>
+    <div class="post-title" th:text="${post.title}"></div>
 </div>
 </body>
 </html>

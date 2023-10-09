@@ -1,13 +1,13 @@
-package huchu.huhaha.presentation;
+package huchu.post.presentation;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
-import huchu.huhaha.application.ImageServiceFacade;
-import huchu.huhaha.dto.ImageResponse;
-import huchu.huhaha.dto.ImageSaveRequest;
-import huchu.huhaha.dto.ImageSaveResponse;
+import huchu.post.application.PostServiceFacade;
+import huchu.post.dto.PostResponse;
+import huchu.post.dto.PostSaveRequest;
+import huchu.post.dto.PostSaveResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,21 +19,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
-public class ImageController {
+public class PostController {
 
-    private final ImageServiceFacade imageServiceFacade;
+    private final PostServiceFacade postServiceFacade;
 
-    @PostMapping(value = "/images", consumes = MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<ImageSaveResponse> save(
-            @RequestPart(value = "dto") ImageSaveRequest imageSaveRequest,
+    @PostMapping(value = "/posts", consumes = MULTIPART_FORM_DATA_VALUE, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<PostSaveResponse> save(
+            @RequestPart(value = "dto") PostSaveRequest postSaveRequest,
             @RequestPart(value = "file") MultipartFile file
     ) {
-        ImageSaveResponse response = imageServiceFacade.save(imageSaveRequest, file);
+        PostSaveResponse response = postServiceFacade.save(postSaveRequest, file);
         return ResponseEntity.status(CREATED).body(response);
     }
 
-    @GetMapping("/images")
-    public List<ImageResponse> readAll() {
-        return imageServiceFacade.readAll();
+    @GetMapping("/posts")
+    public List<PostResponse> readAll() {
+        return postServiceFacade.readAll();
     }
 }

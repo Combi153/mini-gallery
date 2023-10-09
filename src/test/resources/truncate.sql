@@ -1,1 +1,1 @@
-TRUNCATE TABLE image;
+TRUNCATE TABLE post;

@@ -1,4 +1,4 @@
-package huchu.huhaha.application;
+package huchu.file.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

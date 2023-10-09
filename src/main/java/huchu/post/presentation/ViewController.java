@@ -1,7 +1,7 @@
-package huchu.huhaha.presentation;
+package huchu.post.presentation;
 
-import huchu.huhaha.application.ImageServiceFacade;
-import huchu.huhaha.dto.ImageResponse;
+import huchu.post.application.PostServiceFacade;
+import huchu.post.dto.PostResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
-    private final ImageServiceFacade imageServiceFacade;
+    private final PostServiceFacade postServiceFacade;
 
     @GetMapping("/")
     public String index() {
@@ -21,8 +21,8 @@ public class ViewController {
 
     @GetMapping("/gallery")
     public String gallery(Model model) {
-        List<ImageResponse> images = imageServiceFacade.readAll();
-        model.addAttribute("images", images);
+        List<PostResponse> posts = postServiceFacade.readAll();
+        model.addAttribute("posts", posts);
         return "gallery";
     }
 }

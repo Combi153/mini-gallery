@@ -21,11 +21,11 @@
 
 - [ ] Postman test
     - [x] local
-        - [x] get object : GET /images
-        - [x] put object : POST /images
+        - [x] get object : GET /posts
+        - [x] put object : POST /posts
     - [ ] ec2
-        - [ ] get object : GET /images
-        - [ ] put object : POST /images
+        - [ ] get object : GET /posts
+        - [ ] put object : POST /posts
 
 ## 메모
 
