@@ -14,14 +14,14 @@ public class StarUploader {
 
     private static final String ROUTE_IMAGE_FORMAT = "png";
     private final S3Service s3Service;
-    private final String location;
+    private final String directory;
 
     public StarUploader(
             S3Service s3Service,
-            @Value("${cloud.aws.s3.object.star}") String location
+            @Value("${cloud.aws.s3.object.star}") String directory
     ) {
         this.s3Service = s3Service;
-        this.location = location;
+        this.directory = directory;
     }
 
     public String upload(BufferedImage bufferedImage) {
@@ -30,7 +30,7 @@ public class StarUploader {
 
         try {
             ImageIO.write(bufferedImage, ROUTE_IMAGE_FORMAT, byteArrayOutputStream);
-            return s3Service.upload(location + fileName, new ImageMultipartFile(byteArrayOutputStream, fileName));
+            return s3Service.upload(directory, fileName, new ImageMultipartFile(byteArrayOutputStream, fileName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

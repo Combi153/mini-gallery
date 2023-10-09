@@ -29,19 +29,19 @@ public class S3Service {
         this.domain = domain;
     }
 
-    public String upload(String fileName, MultipartFile file) throws IOException {
+    public String upload(String directory, String fileName, MultipartFile file) throws IOException {
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType(file.getContentType());
         metadata.setContentLength(file.getSize());
 
-        String location = base + fileName;
+        String location = base + directory + fileName;
 
         amazonS3.putObject(bucket, location, file.getInputStream(), metadata);
-        return getImageUrl(amazonS3.getUrl(bucket, location).toString());
+        return getImageUrl(directory, amazonS3.getUrl(bucket, location).toString());
     }
 
-    private String getImageUrl(String s3Url) {
+    private String getImageUrl(String directory, String s3Url) {
         int fileNameStart = s3Url.lastIndexOf(SLASH);
-        return domain + SLASH + base + s3Url.substring(fileNameStart + 1);
+        return domain + SLASH + base + directory + s3Url.substring(fileNameStart + 1);
     }
 }

@@ -39,15 +39,16 @@ class S3ServiceTest {
     void 파일을_업로드하고_URL을_반환한다() throws IOException {
         // given
         String name = "testImage";
+        String directory = "directory/";
 
         given(amazonS3.getUrl(anyString(), anyString()))
                 .willReturn(new URL("https://s3/" + name));
 
         // when
-        String imageUrl = s3Service.upload(name, multipartFile);
+        String imageUrl = s3Service.upload(directory, name, multipartFile);
 
         // then
-        assertThat(imageUrl).isEqualTo("https://test.cloudfront/testImage");
+        assertThat(imageUrl).isEqualTo("https://test.cloudfront/base/directory/testImage");
 
         then(amazonS3)
                 .should(times(1))

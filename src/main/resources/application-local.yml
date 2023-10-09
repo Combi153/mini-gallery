@@ -2,6 +2,11 @@ cloud:
   aws:
     s3:
       bucket: test
+      object:
+        domain: https://test.cloudfront
+        base: base/
+        post: directory/
+        star: directory/
     region:
       static: test
       auto: false
@@ -10,8 +15,6 @@ cloud:
       secretKey: testSecretKey
     stack:
       auto: false
-    cloudFront:
-      domain: https://test.cloudfront
 
 spring:
   datasource:
